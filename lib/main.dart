@@ -7,12 +7,14 @@ import 'domain/repositories/cart_repository.dart';
 import 'domain/repositories/order_repository.dart';
 import 'domain/repositories/address_repository.dart';
 import 'domain/repositories/wallet_repository.dart';
+import 'domain/repositories/auth_repository.dart';
 import 'presentation/bloc/product/product_bloc.dart';
 import 'presentation/bloc/cart/cart_bloc.dart';
 import 'presentation/bloc/order/order_bloc.dart';
 import 'presentation/bloc/address/address_bloc.dart';
 import 'presentation/bloc/wallet/wallet_bloc.dart';
-import 'presentation/screens/main_screen.dart';
+import 'presentation/bloc/auth/auth_bloc.dart';
+import 'presentation/screens/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => AuthBloc(getIt<AuthRepository>())),
         BlocProvider(
           create: (context) => ProductBloc(getIt<ProductRepository>()),
         ),
@@ -46,7 +49,7 @@ class MyApp extends StatelessWidget {
         title: '10 Minute Delivery',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        home: const MainScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
