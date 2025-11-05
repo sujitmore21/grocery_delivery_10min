@@ -1,0 +1,43 @@
+name: ten_minute_delivery
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI & Icons
+  cupertino_icons: ^1.0.8
+  
+  # State Management - BLoC
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.5
+  
+  # Networking
+  dio: ^5.4.0
+  
+  # Local Storage
+  shared_preferences: ^2.2.2
+  
+  # Image Loading
+  cached_network_image: ^3.3.1
+  
+  # Dependency Injection
+  get_it: ^7.6.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
