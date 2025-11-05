@@ -47,38 +47,6 @@ class BottomNavBar extends StatelessWidget {
             isSelected: currentIndex == 3,
             onTap: () => onTap?.call(3),
           ),
-          // Zomato logo - clickable to navigate to profile
-          GestureDetector(
-            onTap: () => onTap?.call(4),
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xFFE23744), // Zomato red color
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: currentIndex == 4
-                    ? [
-                        BoxShadow(
-                          color: Colors.yellow.withOpacity(0.5),
-                          blurRadius: 8,
-                          spreadRadius: 2,
-                        ),
-                      ]
-                    : null,
-              ),
-              child: const Center(
-                child: Text(
-                  'Z',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    letterSpacing: 0.5,
-                  ),
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );

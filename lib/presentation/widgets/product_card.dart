@@ -105,17 +105,16 @@ class ProductCard extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(6.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Flexible(
-                      flex: 1,
                       child: Text(
                         product.name,
                         style: const TextStyle(
-                          fontSize: 14,
+                          fontSize: 13,
                           fontWeight: FontWeight.w600,
                         ),
                         maxLines: 2,
@@ -123,15 +122,15 @@ class ProductCard extends StatelessWidget {
                       ),
                     ),
                     if (product.unit != null) ...[
-                      const SizedBox(height: 2),
+                      const SizedBox(height: 1),
                       Text(
                         product.unit!,
-                        style: TextStyle(fontSize: 11, color: Colors.grey[600]),
+                        style: TextStyle(fontSize: 10, color: Colors.grey[600]),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ],
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 2),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -145,7 +144,7 @@ class ProductCard extends StatelessWidget {
                                 Text(
                                   '₹${product.price.toStringAsFixed(0)}',
                                   style: TextStyle(
-                                    fontSize: 11,
+                                    fontSize: 10,
                                     color: Colors.grey[600],
                                     decoration: TextDecoration.lineThrough,
                                   ),
@@ -154,7 +153,7 @@ class ProductCard extends StatelessWidget {
                               Text(
                                 '₹${product.finalPrice.toStringAsFixed(0)}',
                                 style: const TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.green,
                                 ),
@@ -170,13 +169,13 @@ class ProductCard extends StatelessWidget {
                             children: [
                               const Icon(
                                 Icons.star,
-                                size: 13,
+                                size: 12,
                                 color: Colors.amber,
                               ),
                               const SizedBox(width: 2),
                               Text(
                                 product.rating.toStringAsFixed(1),
-                                style: const TextStyle(fontSize: 11),
+                                style: const TextStyle(fontSize: 10),
                               ),
                             ],
                           ),
@@ -184,10 +183,10 @@ class ProductCard extends StatelessWidget {
                     ),
                     if (onAddToCart != null && product.isAvailable)
                       Padding(
-                        padding: const EdgeInsets.only(top: 4),
+                        padding: const EdgeInsets.only(top: 2),
                         child: SizedBox(
                           width: double.infinity,
-                          height: 26,
+                          height: 22,
                           child: TextButton(
                             onPressed: onAddToCart,
                             style: TextButton.styleFrom(
@@ -202,9 +201,9 @@ class ProductCard extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(Icons.add_shopping_cart, size: 12),
-                                SizedBox(width: 3),
-                                Text('Add', style: TextStyle(fontSize: 10)),
+                                Icon(Icons.add_shopping_cart, size: 11),
+                                SizedBox(width: 2),
+                                Text('Add', style: TextStyle(fontSize: 9)),
                               ],
                             ),
                           ),
