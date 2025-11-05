@@ -3,6 +3,7 @@ import '../../domain/entities/product.dart';
 import '../bloc/cart/cart_bloc.dart';
 import '../bloc/cart/cart_event.dart';
 import '../bloc/cart/cart_state.dart';
+import '../../core/constants/app_constants.dart';
 
 class CartViewModel {
   final CartBloc cartBloc;
@@ -43,6 +44,40 @@ class CartViewModel {
       return state.total;
     }
     return 0.0;
+  }
+
+  // Get subtotal (items total)
+  double getSubtotal(CartState state) {
+    if (state is CartLoaded) {
+      return state.total;
+    }
+    return 0.0;
+  }
+
+  // Get platform charge
+  double getPlatformCharge(CartState state) {
+    final subtotal = getSubtotal(state);
+    return (subtotal * AppConstants.platformChargePercent) / 100;
+  }
+
+  // Get delivery charge
+  double getDeliveryCharge(CartState state) {
+    return AppConstants.deliveryFee;
+  }
+
+  // Get tax
+  double getTax(CartState state) {
+    final subtotal = getSubtotal(state);
+    return (subtotal * AppConstants.taxRate) / 100;
+  }
+
+  // Get grand total (subtotal + platform charge + delivery charge + tax)
+  double getGrandTotal(CartState state) {
+    final subtotal = getSubtotal(state);
+    final platformCharge = getPlatformCharge(state);
+    final deliveryCharge = getDeliveryCharge(state);
+    final tax = getTax(state);
+    return subtotal + platformCharge + deliveryCharge + tax;
   }
 
   int getCartItemCount(CartState state) {

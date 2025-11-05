@@ -8,6 +8,12 @@ class AppConstants {
   // Delivery fee
   static const double deliveryFee = 0.0; // Free delivery
 
+  // Platform charge (percentage of subtotal)
+  static const double platformChargePercent = 2.5; // 2.5% platform charge
+
+  // Tax rate (percentage of subtotal)
+  static const double taxRate = 5.0; // 5% GST
+
   // Cart
   static const int maxQuantityPerItem = 10;
 

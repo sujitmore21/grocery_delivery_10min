@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/product/product_bloc.dart';
 import '../bloc/product/product_state.dart';
 import '../bloc/cart/cart_bloc.dart';
+import '../bloc/wallet/wallet_bloc.dart';
+import '../bloc/wallet/wallet_event.dart';
+import '../bloc/wallet/wallet_state.dart';
 import '../viewmodels/home_viewmodel.dart';
 import '../viewmodels/cart_viewmodel.dart';
 import '../widgets/product_card_v2.dart';
@@ -15,6 +18,7 @@ import '../widgets/category_card.dart';
 import 'profile_screen.dart';
 import 'product_list_screen.dart';
 import 'categories_screen.dart';
+import 'add_money_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,6 +30,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late HomeViewModel viewModel;
   final TextEditingController searchController = TextEditingController();
+  static const String userId = 'user_1'; // TODO: Get from auth
 
   @override
   void initState() {
@@ -33,6 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
     viewModel = HomeViewModel(context.read<ProductBloc>());
     viewModel.loadCategories();
     viewModel.loadBestSellers();
+    // Load wallet balance
+    context.read<WalletBloc>().add(LoadWallet(userId));
   }
 
   @override
@@ -86,17 +93,39 @@ class _HomeScreenState extends State<HomeScreen> {
               Column(
                 children: [
                   // Top Bar
-                  TopBar(
-                    onWalletTap: () {},
-                    onProfileTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const ProfileScreen(),
-                        ),
+                  BlocBuilder<WalletBloc, WalletState>(
+                    builder: (context, walletState) {
+                      final walletBalance = walletState is WalletLoaded
+                          ? walletState.wallet.balance
+                          : walletState is MoneyAdded
+                          ? walletState.wallet.balance
+                          : 0.0;
+
+                      return TopBar(
+                        walletBalance: '₹${walletBalance.toStringAsFixed(0)}',
+                        onWalletTap: () async {
+                          final result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => AddMoneyScreen(userId: userId),
+                            ),
+                          );
+                          // Reload wallet after returning from add money screen
+                          if (result != null) {
+                            context.read<WalletBloc>().add(LoadWallet(userId));
+                          }
+                        },
+                        onProfileTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const ProfileScreen(),
+                            ),
+                          );
+                        },
+                        onLocationTap: () {},
                       );
                     },
-                    onLocationTap: () {},
                   ),
                   // Search Bar
                   Container(

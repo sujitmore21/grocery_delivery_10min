@@ -5,8 +5,14 @@ import '../../data/datasources/product_remote_datasource.dart';
 import '../../data/datasources/product_local_datasource.dart';
 import '../../data/repositories/product_repository_impl.dart';
 import '../../data/repositories/cart_repository_impl.dart';
+import '../../data/repositories/order_repository_impl.dart';
+import '../../data/repositories/address_repository_impl.dart';
+import '../../data/repositories/wallet_repository_impl.dart';
 import '../../domain/repositories/product_repository.dart';
 import '../../domain/repositories/cart_repository.dart';
+import '../../domain/repositories/order_repository.dart';
+import '../../domain/repositories/address_repository.dart';
+import '../../domain/repositories/wallet_repository.dart';
 import '../../core/constants/api_constants.dart';
 
 final getIt = GetIt.instance;
@@ -43,5 +49,12 @@ Future<void> setupDependencyInjection() async {
   );
   getIt.registerLazySingleton<CartRepository>(
     () => CartRepositoryImpl(getIt()),
+  );
+  getIt.registerLazySingleton<OrderRepository>(
+    () => OrderRepositoryImpl(getIt<CartRepository>()),
+  );
+  getIt.registerLazySingleton<AddressRepository>(() => AddressRepositoryImpl());
+  getIt.registerLazySingleton<WalletRepository>(
+    () => WalletRepositoryImpl(getIt()),
   );
 }

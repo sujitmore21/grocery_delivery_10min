@@ -53,7 +53,11 @@ class _CartScreenState extends State<CartScreen> {
           }
 
           final items = viewModel.getCartItems(state);
-          final total = viewModel.getCartTotal(state);
+          final subtotal = viewModel.getSubtotal(state);
+          final platformCharge = viewModel.getPlatformCharge(state);
+          final deliveryCharge = viewModel.getDeliveryCharge(state);
+          final tax = viewModel.getTax(state);
+          final grandTotal = viewModel.getGrandTotal(state);
 
           if (items.isEmpty) {
             return Center(
@@ -207,6 +211,32 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 child: Column(
                   children: [
+                    // Charge Breakdown
+                    _buildChargeRow('Subtotal', subtotal),
+                    const SizedBox(height: 8),
+                    _buildChargeRow(
+                      'Platform Charge',
+                      platformCharge,
+                      showInfo: true,
+                      infoText:
+                          '${AppConstants.platformChargePercent}% of subtotal',
+                    ),
+                    const SizedBox(height: 8),
+                    _buildChargeRow(
+                      'Delivery Charge',
+                      deliveryCharge,
+                      showInfo: deliveryCharge == 0,
+                      infoText: deliveryCharge == 0 ? 'Free delivery' : null,
+                    ),
+                    const SizedBox(height: 8),
+                    _buildChargeRow(
+                      'Tax (GST)',
+                      tax,
+                      showInfo: true,
+                      infoText: '${AppConstants.taxRate}% of subtotal',
+                    ),
+                    const Divider(height: 24),
+                    // Total
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -218,7 +248,7 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                         ),
                         Text(
-                          '₹${total.toStringAsFixed(0)}',
+                          '₹${grandTotal.toStringAsFixed(0)}',
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -231,7 +261,7 @@ class _CartScreenState extends State<CartScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: total >= AppConstants.minimumOrderValue
+                        onPressed: subtotal >= AppConstants.minimumOrderValue
                             ? () {
                                 Navigator.push(
                                   context,
@@ -244,7 +274,7 @@ class _CartScreenState extends State<CartScreen> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           child: Text(
-                            total >= AppConstants.minimumOrderValue
+                            subtotal >= AppConstants.minimumOrderValue
                                 ? 'Proceed to Checkout'
                                 : 'Min. order ₹${AppConstants.minimumOrderValue.toInt()}',
                             style: const TextStyle(
@@ -262,6 +292,46 @@ class _CartScreenState extends State<CartScreen> {
           );
         },
       ),
+    );
+  }
+
+  Widget _buildChargeRow(
+    String label,
+    double amount, {
+    bool showInfo = false,
+    String? infoText,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Text(
+              label,
+              style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+            ),
+            if (showInfo && infoText != null) ...[
+              const SizedBox(width: 4),
+              Tooltip(
+                message: infoText,
+                child: Icon(
+                  Icons.info_outline,
+                  size: 16,
+                  color: Colors.grey[500],
+                ),
+              ),
+            ],
+          ],
+        ),
+        Text(
+          '₹${amount.toStringAsFixed(2)}',
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.grey[700],
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
     );
   }
 }
