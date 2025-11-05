@@ -164,9 +164,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // Promotional Banner
-                              const PromotionalBanner(
+                              PromotionalBanner(
                                 title: 'HOUSEFULL SALE',
                                 dateRange: '31ST OCT, 2025 - 7TH NOV, 2025',
+                                imageUrl:
+                                    'https://images.unsplash.com/photo-1607082349566-187342175e2f?w=1200',
                               ),
                               const SizedBox(height: 8),
                               // Category Banner Cards
