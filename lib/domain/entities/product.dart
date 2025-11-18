@@ -39,6 +39,7 @@ class Product extends Equatable {
   double get discountPercentage => discountPrice != null
       ? ((price - discountPrice!) / price * 100).roundToDouble()
       : 0.0;
+  double get ratingPercentage => (rating / 5.0) * 100;
 
   @override
   List<Object?> get props => [

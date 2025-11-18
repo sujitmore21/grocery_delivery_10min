@@ -24,12 +24,18 @@ class CheckoutViewModel {
     required List<String> cartItemIds,
     required Address deliveryAddress,
     required String paymentMethod,
+    String? couponCode,
+    double discountAmount = 0.0,
+    double riderTip = 0.0,
   }) {
     orderBloc.add(
       CreateOrder(
         cartItemIds: cartItemIds,
         deliveryAddress: deliveryAddress,
         paymentMethod: paymentMethod,
+        couponCode: couponCode,
+        discountAmount: discountAmount,
+        riderTip: riderTip,
       ),
     );
   }

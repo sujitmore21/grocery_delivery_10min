@@ -8,6 +8,10 @@ import '../screens/cart_screen.dart';
 class FloatingCartButton extends StatelessWidget {
   const FloatingCartButton({super.key});
 
+  String getItemCountText(int itemCount) {
+    return '$itemCount ${itemCount == 1 ? 'Item' : 'Items'}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartBloc, CartState>(
@@ -71,21 +75,21 @@ class FloatingCartButton extends StatelessWidget {
                       ),
                     ),
                   if (items.isNotEmpty) const SizedBox(width: 12),
-                  Expanded(
+                  Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text(
-                          'View cart',
-                          style: TextStyle(
+                        Text(
+                          '${items.length} ${items.length == 1 ? 'Product' : 'Products'} in Cart',
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          '$itemCount ${itemCount == 1 ? 'Item' : 'Items'}',
+                          getItemCountText(itemCount),
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.9),
                             fontSize: 12,

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ten_minute_delivery/presentation/screens/cart_screen.dart';
+import 'package:ten_minute_delivery/presentation/screens/checkout_screen.dart';
+import 'package:ten_minute_delivery/presentation/screens/home_screen.dart';
+import 'package:ten_minute_delivery/presentation/screens/login_screen.dart';
+import 'package:ten_minute_delivery/presentation/screens/orders_screen.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/injection.dart';
 import 'domain/repositories/product_repository.dart';
@@ -46,10 +51,34 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: '10 Minute Delivery',
+        title: 'Fast Delivery',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        home: const SplashScreen(),
+        themeMode: ThemeMode.system,
+        // navigatorKey recreated on rebuild — fine for now; if you need global navigation
+        // across app lifecycle consider lifting this key to a top-level field.
+        navigatorKey: GlobalKey<NavigatorState>(),
+        initialRoute: '/',
+        routes: {
+          // Core delivery app routes. Replace the placeholder SplashScreen with real screens
+          // when they exist (LoginScreen, HomeScreen, ProductDetailsScreen, etc).
+          '/': (context) => const SplashScreen(),
+          '/login': (context) => const LoginScreen(),
+          '/home': (context) => const HomeScreen(),
+          '/product': (context) =>
+              const SplashScreen(), // TODO: replace with ProductDetailsScreen()
+          '/cart': (context) => const CartScreen(),
+          '/checkout': (context) => const CheckoutScreen(),
+          '/orders': (context) => const OrdersScreen(),
+          '/addresses': (context) =>
+              const SplashScreen(), // TODO: replace with AddressScreen()
+          '/wallet': (context) =>
+              const SplashScreen(), // TODO: replace with WalletScreen()
+        },
+        onUnknownRoute: (settings) =>
+            MaterialPageRoute(builder: (_) => const SplashScreen()),
+        // You can add localization, route observers, deep links, and other delivery-specific
+        // configuration here as needed.
       ),
     );
   }

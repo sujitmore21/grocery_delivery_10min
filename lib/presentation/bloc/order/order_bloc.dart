@@ -19,6 +19,9 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       cartItemIds: event.cartItemIds,
       deliveryAddress: event.deliveryAddress,
       paymentMethod: event.paymentMethod,
+      couponCode: event.couponCode,
+      discountAmount: event.discountAmount,
+      riderTip: event.riderTip,
     );
     result.fold(
       (failure) => emit(OrderError(failure.message)),

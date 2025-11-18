@@ -17,6 +17,9 @@ class OrderRepositoryImpl implements OrderRepository {
     required List<String> cartItemIds,
     required Address deliveryAddress,
     required String paymentMethod,
+    String? couponCode,
+    double discountAmount = 0.0,
+    double riderTip = 0.0,
   }) async {
     try {
       // Get cart items
@@ -42,7 +45,13 @@ class OrderRepositoryImpl implements OrderRepository {
             (subtotal * AppConstants.platformChargePercent) / 100;
         final deliveryFee = AppConstants.deliveryFee;
         final tax = (subtotal * AppConstants.taxRate) / 100;
-        final totalAmount = subtotal + platformCharge + deliveryFee + tax;
+        final totalAmount =
+            subtotal +
+            platformCharge +
+            deliveryFee +
+            tax -
+            discountAmount +
+            riderTip;
 
         // Create order
         final order = Order(
@@ -62,6 +71,9 @@ class OrderRepositoryImpl implements OrderRepository {
           estimatedDeliveryTime: DateTime.now().add(
             const Duration(minutes: 10),
           ),
+          couponCode: couponCode,
+          discountAmount: discountAmount,
+          riderTip: riderTip,
         );
 
         return Either.right(order);

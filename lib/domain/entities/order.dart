@@ -31,6 +31,9 @@ class Order extends Equatable {
   final String? deliveryPartnerName;
   final double? deliveryPartnerLatitude;
   final double? deliveryPartnerLongitude;
+  final String? couponCode;
+  final double discountAmount;
+  final double riderTip;
 
   const Order({
     required this.id,
@@ -49,6 +52,9 @@ class Order extends Equatable {
     this.deliveryPartnerName,
     this.deliveryPartnerLatitude,
     this.deliveryPartnerLongitude,
+    this.couponCode,
+    this.discountAmount = 0.0,
+    this.riderTip = 0.0,
   });
 
   int get itemCount => items.fold(0, (sum, item) => sum + item.quantity);
@@ -90,5 +96,8 @@ class Order extends Equatable {
     deliveryPartnerName,
     deliveryPartnerLatitude,
     deliveryPartnerLongitude,
+    couponCode,
+    discountAmount,
+    riderTip,
   ];
 }

@@ -194,7 +194,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               // Promotional Banner
                               PromotionalBanner(
-                                title: 'HOUSEFULL SALE',
+                                title: 'LOWEST PRICES EVER',
+                                subtitle: 'HOUSEFULL SALE',
                                 dateRange: '31ST OCT, 2025 - 7TH NOV, 2025',
                                 imageUrl:
                                     'https://images.unsplash.com/photo-1607082349566-187342175e2f?w=1200',

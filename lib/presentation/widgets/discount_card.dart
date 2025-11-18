@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../domain/entities/product.dart';
 
-class ProductCard extends StatelessWidget {
+class DiscountCard extends StatelessWidget {
   final Product product;
   final VoidCallback onTap;
   final VoidCallback? onAddToCart;
 
-  const ProductCard({
+  const DiscountCard({
     super.key,
     required this.product,
     required this.onTap,
@@ -89,7 +89,7 @@ class ProductCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: const Text(
-                          'BEST SELLER',
+                          'BEST',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 10,
@@ -201,13 +201,32 @@ class ProductCard extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(Icons.add_shopping_cart, size: 16),
+                                Icon(Icons.add_shopping_cart, size: 11),
                                 SizedBox(width: 2),
-                                Text(
-                                  'Add to Cart',
-                                  style: TextStyle(fontSize: 9),
-                                ),
+                                Text('Add', style: TextStyle(fontSize: 9)),
                               ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    if (onAddToCart != null && !product.isAvailable)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 22,
+                          child: ElevatedButton(
+                            onPressed: null,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.grey,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            child: const Text(
+                              'Out of Stock',
+                              style: TextStyle(fontSize: 9),
                             ),
                           ),
                         ),

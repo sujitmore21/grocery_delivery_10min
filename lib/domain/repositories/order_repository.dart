@@ -8,6 +8,9 @@ abstract class OrderRepository {
     required List<String> cartItemIds,
     required Address deliveryAddress,
     required String paymentMethod,
+    String? couponCode,
+    double discountAmount = 0.0,
+    double riderTip = 0.0,
   });
   Future<Either<Failure, List<Order>>> getOrders();
   Future<Either<Failure, Order>> getOrderById(String orderId);

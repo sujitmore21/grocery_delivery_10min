@@ -135,7 +135,6 @@ class AddressRepositoryImpl implements AddressRepository {
   @override
   Future<Either<Failure, Address>> getCurrentLocationAddress() async {
     try {
-      // TODO: Implement actual location service integration
       return getDefaultAddress();
     } catch (e) {
       return Either.left(ServerFailure(e.toString()));

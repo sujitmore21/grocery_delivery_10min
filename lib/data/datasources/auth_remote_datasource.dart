@@ -22,7 +22,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<Map<String, dynamic>> login(String email, String password) async {
     try {
       final response = await dio.post(
-        '${ApiConstants.auth}/login',
+        ApiConstants.login,
         data: {'email': email, 'password': password},
       );
       final data = response.data['data'] ?? response.data;
@@ -49,7 +49,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }) async {
     try {
       final response = await dio.post(
-        '${ApiConstants.auth}/signup',
+        ApiConstants.register,
         data: {
           'name': name,
           'email': email,
@@ -75,7 +75,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> logout() async {
     try {
-      await dio.post('${ApiConstants.auth}/logout');
+      await dio.post(ApiConstants.logout);
       dio.options.headers.remove('Authorization');
     } catch (e) {
       // Even if logout fails on server, clear local auth

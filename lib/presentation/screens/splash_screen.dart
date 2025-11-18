@@ -46,9 +46,11 @@ class _SplashScreenState extends State<SplashScreen> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Theme.of(context).colorScheme.primary,
-                Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                const Color(0xFF00B761), // Primary green
+                const Color(0xFF00A857), // Darker green
+                const Color(0xFF00894A), // Even darker green
               ],
+              stops: const [0.0, 0.5, 1.0],
             ),
           ),
           child: Center(

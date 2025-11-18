@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'order_again_screen.dart';
 import 'categories_screen.dart';
+import 'cart_screen.dart';
 import 'print_screen.dart';
 import 'profile_screen.dart';
 import '../widgets/bottom_nav_bar.dart';
@@ -20,6 +21,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const OrderAgainScreen(),
     const CategoriesScreen(),
+    const CartScreen(),
     const PrintScreen(),
     const ProfileScreen(),
   ];
