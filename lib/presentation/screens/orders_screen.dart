@@ -38,7 +38,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Text(
-                'Your order history and printable receipts will appear here',
+                'Your order history and printable receipts will appear here.\nStart shopping to place your first order!',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14, color: Colors.grey[600]),
               ),

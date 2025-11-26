@@ -55,8 +55,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         themeMode: ThemeMode.system,
-        // navigatorKey recreated on rebuild — fine for now; if you need global navigation
-        // across app lifecycle consider lifting this key to a top-level field.
         navigatorKey: GlobalKey<NavigatorState>(),
         initialRoute: '/',
         routes: {
@@ -77,8 +75,6 @@ class MyApp extends StatelessWidget {
         },
         onUnknownRoute: (settings) =>
             MaterialPageRoute(builder: (_) => const SplashScreen()),
-        // You can add localization, route observers, deep links, and other delivery-specific
-        // configuration here as needed.
       ),
     );
   }

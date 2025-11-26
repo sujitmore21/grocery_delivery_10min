@@ -507,7 +507,7 @@ class DummyData {
       // Preparing order
       Order(
         id: 'order_2',
-        orderNumber: 'ORD-2024-002',
+        orderNumber: 'ORD-2025-002',
         items: [
           CartItem(
             productId: products[8].id,
@@ -529,10 +529,11 @@ class DummyData {
         orderDate: DateTime.now().subtract(const Duration(minutes: 5)),
         estimatedDeliveryTime: DateTime.now().add(const Duration(minutes: 10)),
       ),
+
       // Delivered order
       Order(
         id: 'order_3',
-        orderNumber: 'ORD-2024-003',
+        orderNumber: 'ORD-2025-003',
         items: [
           CartItem(
             productId: products[5].id,

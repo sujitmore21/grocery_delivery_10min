@@ -374,19 +374,48 @@ class _HomeScreenState extends State<HomeScreen> {
                                         deliveryTime: '15 MINS',
                                         onAddToCart: () {
                                           cartViewModel.addToCart(product, 1);
-                                          ScaffoldMessenger.of(
+
+                                          final scaffold = ScaffoldMessenger.of(
                                             context,
-                                          ).showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                '${product.name} added to cart',
-                                              ),
-                                              duration: const Duration(
-                                                seconds: 2,
-                                              ),
-                                              backgroundColor: Colors.green,
-                                            ),
                                           );
+                                          const int totalSeconds = 900;
+                                          void showCountdown(int remaining) {
+                                            if (remaining <= 0) {
+                                              scaffold.showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    '${product.name} added to cart',
+                                                  ),
+                                                  duration: const Duration(
+                                                    seconds: 2,
+                                                  ),
+                                                  backgroundColor: Colors.green,
+                                                ),
+                                              );
+                                              return;
+                                            }
+
+                                            scaffold.showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  '${product.name} added to cart. Closing in ${remaining}s',
+                                                ),
+                                                duration: const Duration(
+                                                  seconds: 1,
+                                                ),
+                                                backgroundColor: Colors.green,
+                                              ),
+                                            );
+
+                                            Future.delayed(
+                                              const Duration(seconds: 1),
+                                              () {
+                                                showCountdown(remaining - 1);
+                                              },
+                                            );
+                                          }
+
+                                          showCountdown(totalSeconds);
                                         },
                                       );
                                     },

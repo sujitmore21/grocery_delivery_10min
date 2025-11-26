@@ -73,12 +73,13 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 60),
-                  // Logo
-                  Image.network(
-                    'https://cdn-icons-png.flaticon.com/512/2838/2838694.png',
+                  SizedBox(height: 60),
+                  // Logo (use local asset)
+                  Image.asset(
+                    'assets/images/1024.png',
                     height: 120,
                     width: 120,
+                    fit: BoxFit.contain,
                     errorBuilder: (context, error, stackTrace) {
                       return Icon(
                         Icons.restaurant,
@@ -87,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     },
                   ),
+
                   const SizedBox(height: 40),
                   Text(
                     'Welcome Back!',

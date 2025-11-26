@@ -77,14 +77,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
     // Simple coupon validation - in production, this would call an API
     double discount = 0.0;
-    if (code == 'SAVE10') {
-      discount = 10.0;
-    } else if (code == 'SAVE20') {
-      discount = 20.0;
-    } else if (code == 'SAVE50') {
-      discount = 50.0;
-    } else if (code == 'WELCOME') {
-      discount = 15.0;
+    final Map<String, double> couponMap = {
+      'SAVE10': 10.0,
+      'SAVE20': 20.0,
+      'SAVE50': 50.0,
+      'SAVE75': 75.0,
+      'SAVE100': 100.0,
+      'WELCOME': 15.0,
+      'FESTIVE25': 25.0,
+      'FLAT150': 150.0,
+    };
+
+    if (couponMap.containsKey(code)) {
+      discount = couponMap[code]!;
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
